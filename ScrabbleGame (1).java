@@ -1,10 +1,17 @@
+/**
+ * ScrabbleGame.java
+ * Author: Nestor Juarez
+ * Date: July 8, 2025
+ * 
+ * A simple Scrabble-like game that allows the user to form a word 
+ * from 4 random letters and calculates a score based on Scrabble rules.
+ */
+
 import java.io.*;
 import java.util.*;
 
-// IMPROVEMENT: Added a point system based on word length and scoring rules like Scrabble.
-// See lines marked with // IMPROVEMENT for at least 20 lines of enhancement code.
-
 public class ScrabbleGame {
+
     private ArrayList<Word> dictionary = new ArrayList<>();
     private Random rand = new Random();
     private final String DICTIONARY_FILE = "CollinsScrabbleWords_2019.txt";
@@ -16,6 +23,9 @@ public class ScrabbleGame {
         game.playGame();
     }
 
+    /**
+     * Loads the dictionary file into an ArrayList and sorts it.
+     */
     public void loadWords() {
         try (Scanner fileScanner = new Scanner(new File(DICTIONARY_FILE))) {
             while (fileScanner.hasNextLine()) {
@@ -30,6 +40,9 @@ public class ScrabbleGame {
         }
     }
 
+    /**
+     * Main game loop: show letters, accept user input, and score the word.
+     */
     public void playGame() {
         Scanner input = new Scanner(System.in);
         letters = generateRandomLetters(4);
@@ -46,6 +59,9 @@ public class ScrabbleGame {
         }
     }
 
+    /**
+     * Generates a random array of lowercase letters.
+     */
     private char[] generateRandomLetters(int count) {
         char[] letters = new char[count];
         for (int i = 0; i < count; i++) {
@@ -54,27 +70,37 @@ public class ScrabbleGame {
         return letters;
     }
 
+    /**
+     * Checks if the word can be formed from the given random letters.
+     */
     private boolean isMadeFromLetters(String word) {
         char[] temp = Arrays.copyOf(letters, letters.length);
         for (char c : word.toCharArray()) {
             boolean found = false;
             for (int i = 0; i < temp.length; i++) {
                 if (temp[i] == c) {
-                    temp[i] = ' '; // mark used
+                    temp[i] = ' '; // mark as used
                     found = true;
                     break;
                 }
             }
-            if (!found) return false;
+            if (!found) {
+                return false;
+            }
         }
         return true;
     }
 
+    /**
+     * Checks if the word exists in the loaded dictionary.
+     */
     private boolean isValidWord(String word) {
         return Collections.binarySearch(dictionary, new Word(word)) >= 0;
     }
 
-    // IMPROVEMENT: Added a method to calculate Scrabble-style points based on word length and letters.
+    /**
+     * IMPROVEMENT: Calculates score based on Scrabble letter values.
+     */
     private int calculatePoints(String word) {
         Map<Character, Integer> letterPoints = Map.ofEntries(
             Map.entry('a', 1), Map.entry('b', 3), Map.entry('c', 3),
