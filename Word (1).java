@@ -1,5 +1,13 @@
-// Word.java
+/**
+ * Word.java
+ * Author: Nestor Juarez
+ * Date: July 8, 2025
+ * 
+ * A wrapper class for words that allows comparison and sorting.
+ */
+
 public class Word implements Comparable<Word> {
+
     private String text;
 
     public Word(String text) {
@@ -20,3 +28,4 @@ public class Word implements Comparable<Word> {
         return text;
     }
 }
+
