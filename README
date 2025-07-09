@@ -1,0 +1,23 @@
+# Scrabble Game
+
+**Author:** Nestor Juarez  
+**Date:** July 8, 2025  
+
+## 📋 Overview
+This project is a simple Scrabble-like word game written in Java. The program:
+
+- Loads a dictionary of valid words from a file
+- Randomly generates 4 lowercase letters
+- Prompts the user to form a valid word using those letters
+- Validates the word against the dictionary and letter set
+- Calculates a score based on Scrabble letter values
+
+## ✅ How to Run
+
+1. Make sure `ScrabbleGame.java` and `Word.java` are in the same folder.
+2. Place the file `CollinsScrabbleWords_2019.txt` in the same folder.
+3. Compile and run:
+
+```bash
+javac ScrabbleGame.java Word.java
+java ScrabbleGame
